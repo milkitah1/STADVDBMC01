@@ -24,7 +24,6 @@ CREATE TABLE dim_time (
     time_key        INT PRIMARY KEY,          -- seconds since midnight (0-86399) or hhmm
     hour_24         SMALLINT NOT NULL,
     minute          SMALLINT NOT NULL,
-    am_pm           CHAR(2) NOT NULL,
     day_part        VARCHAR(12) NOT NULL      -- Overnight / Morning / Midday / Evening
 );
 
