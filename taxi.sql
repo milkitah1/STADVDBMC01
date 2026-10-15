@@ -20,6 +20,7 @@ CREATE TABLE dim_date (
     holiday_name    VARCHAR(50) 
 );
 
+
 CREATE TABLE dim_time (
     time_key        INT PRIMARY KEY,          -- seconds since midnight (0-86399) or hhmm
     hour_24         SMALLINT NOT NULL,
@@ -138,3 +139,18 @@ INSERT INTO dim_store_and_fwd VALUES
     (1, 'Y', 'Store and forward trip'),
     (2, 'N', 'Not a store and forward trip'),
     (0, '?', 'Unknown');
+INSERT INTO dim_date 
+VALUES ( -1, 
+    '1900-01-01', 
+    1900, 
+    1, 
+    1, 
+    'Unknown', 
+    1, 
+    1, 
+    'Unknown', 
+    FALSE, 
+    FALSE, 
+    'Unknown'
+);
+ 
