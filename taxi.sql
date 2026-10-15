@@ -67,7 +67,7 @@ CREATE TABLE dim_location (
 -- ---------------------------------------------------------------------
 
 CREATE TABLE fact_trip (
-    trip_key               BIGINT PRIMARY KEY,   -- surrogate key
+    trip_key               BIGINT PRIMARY KEY AUTO_INCREMENT,   -- surrogate key
 
     -- Foreign keys to dimensions
     pickup_date_key        INT      NOT NULL REFERENCES dim_date(date_key),
