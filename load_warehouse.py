@@ -15,7 +15,7 @@ target_engine = create_engine(
 
 SOURCE_TABLE = "yellow_tripdata"
 READ_CHUNK_SIZE = 100_000
-INSERT_BATCH_SIZE = 20000
+INSERT_BATCH_SIZE = 5_000
 
 # 2. SOURCE COLUMNS
 columns = [
