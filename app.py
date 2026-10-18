@@ -71,10 +71,7 @@ conditions = ["1=1"]
 
 if selected_boroughs:
     b_list = "', '".join(selected_boroughs)
-    conditions.append(
-        f"f.pickup_location_key IN "
-        f"(SELECT location_key FROM dim_location WHERE borough IN ('{b_list}'))"
-    )
+    conditions.append(f"f.borough IN ('{b_list}')")
 
 if selected_months:
     month_ranges = []
@@ -96,20 +93,15 @@ base_sql = f"""
     SELECT
         f.pickup_date_key,
         f.pickup_location_key,
-        CASE
-            WHEN f.pickup_time_key < 600  THEN 'Overnight'
-            WHEN f.pickup_time_key < 1200 THEN 'Morning'
-            WHEN f.pickup_time_key < 1700 THEN 'Midday'
-            ELSE 'Evening'
-        END AS day_part,
-        COUNT(*)             AS trips,
-        SUM(f.total_amount)  AS revenue,
-        SUM(f.fare_amount)   AS fare_sum,
-        SUM(f.trip_distance) AS dist_sum,
-        SUM(f.tip_amount)    AS tip_sum
-    FROM fact_trip f
+        f.day_part,
+        SUM(f.trips)    AS trips,
+        SUM(f.revenue)  AS revenue,
+        SUM(f.fare_sum) AS fare_sum,
+        SUM(f.dist_sum) AS dist_sum,
+        SUM(f.tip_sum)  AS tip_sum
+    FROM fact_trip_denorm f
     WHERE {where_clause}
-    GROUP BY f.pickup_date_key, f.pickup_location_key, day_part
+    GROUP BY f.pickup_date_key, f.pickup_location_key, f.day_part
 """
 
 # Run the one big query and time it
