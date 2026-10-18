@@ -9,7 +9,7 @@ st.set_page_config(page_title="NYC Taxi OLAP Dashboard", layout="wide")
 @st.cache_resource
 def get_engine():
     # MySQL credentials
-    return create_engine("mysql+pymysql://root:12345678@127.0.0.1:3306/nyc_taxi_dw")
+    return create_engine("mysql+pymysql://root:123456@127.0.0.1:3306/nyc_taxi_dw")
 
 engine = get_engine()
 
